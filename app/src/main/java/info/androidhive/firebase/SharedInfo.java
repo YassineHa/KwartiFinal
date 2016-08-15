@@ -6,4 +6,5 @@ package info.androidhive.firebase;
 public class  SharedInfo {
 
     public static Card cardShared = new Card();
+    public static int sharedposition;
 }

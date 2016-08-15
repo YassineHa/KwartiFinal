@@ -68,6 +68,8 @@ public class Accueil extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        db= FirebaseDatabase.getInstance().getReference();
+        db.keepSynced(true);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 //___________________________  recycle init________ _________________________________
@@ -88,7 +90,7 @@ public class Accueil extends AppCompatActivity
 
 // ___________________________ ____________________ _________________________________
 
-        db= FirebaseDatabase.getInstance().getReference();
+
         helper= new FireBaseHelper(db);
 
 
@@ -389,7 +391,7 @@ public class Accueil extends AppCompatActivity
                 c.setDescription(ds.getValue(Card.class).getDescription());
                 c.setEmailUser(ds.getValue(Card.class).getEmailUser());
                 c.setBrand(ds.getValue(Card.class).getBrand());
-                c.setId(ds.getValue(Card.class).getId());
+                c.setId(ds.getKey());
                 c.setThumbnail(ds.getValue(Card.class).getThumbnail());
 
             if(c.getEmailUser().equals(auth.getCurrentUser().getEmail())) {
@@ -411,5 +413,9 @@ public class Accueil extends AppCompatActivity
 
 
 
-
+   /* public void deletePerson(int position) {
+        String clickedKey = cardList.get(SharedInfo.sharedposition);
+        mDatabase.child(clickedKey).removeValue();
+    }
+*/
 }

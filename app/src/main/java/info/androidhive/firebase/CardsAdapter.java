@@ -39,7 +39,7 @@ public class CardsAdapter  extends RecyclerView.Adapter<CardsAdapter.MyViewHolde
             title = (TextView) view.findViewById(R.id.title);
             count = (TextView) view.findViewById(R.id.count);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            overflow = (ImageView) view.findViewById(R.id.overflow);
+            //overflow = (ImageView) view.findViewById(R.id.overflow);
         }
     }
 
@@ -59,7 +59,7 @@ public class CardsAdapter  extends RecyclerView.Adapter<CardsAdapter.MyViewHolde
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        Card card = cardList.get(position);
+        final Card card = cardList.get(position);
 
         holder.title.setText(card.getName());
         holder.count.setText(card.getCompanyName());
@@ -74,7 +74,17 @@ public class CardsAdapter  extends RecyclerView.Adapter<CardsAdapter.MyViewHolde
             @Override
             public void onClick(View v) {
                 SharedInfo.cardShared=cardList.get(position);
+                SharedInfo.sharedposition=position;
 
+               /* holder.overflow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        cardList.remove(position);
+
+
+                    }
+                });*/
 
                 Intent intent = new Intent(mContext,cardDetails.class);
 
@@ -89,12 +99,6 @@ public class CardsAdapter  extends RecyclerView.Adapter<CardsAdapter.MyViewHolde
         // loading card cover using Glide library
         //Glide.with(mContext).load(card.getThumbnail()).into(holder.thumbnail);
 
-        holder.overflow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopupMenu(holder.overflow);
-            }
-        });
     }
 
     /**
